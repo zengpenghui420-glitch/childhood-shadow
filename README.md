@@ -15,9 +15,10 @@ https://zengpenghui420-glitch.github.io/childhood-shadow/
 | 计分 | 每维 3 题；`rev` 题按 `6−v`；维分 `(mean−1)/4×100`。**高分 = 该侧印记更重** |
 | 结果 | 阴影指数 0–100（六维均值四舍五入）+ 档位 + 最重的一面 + 雷达 + 特征 + 小建议 |
 | 档位 | DEW / HAZE / DUSK / UMBRA / ECLIPSE / NIGHT |
-| 验证码 | `CS****`，每码 3 次；vault quiz key `shadow`；**不接 Mantle** |
-| 接口 | `https://snappy-tundra-7uesdvk.tmp.now`（`quiz=shadow`） |
-| 重新测试 | 清会话解锁 → 再弹码 → redeem（扣次） |
+| 订单号 | 小红书「我的订单」复制。`quiz=shadow`，一单最多 3 次。界面不核验、不宣传付款 |
+| 扣次 | 开始新一次 `POST /order/redeem`。同一次中途刷新、继续、结果刷新 `GET /order/get` 不扣。再测才再扣。第 4 次拒绝并保留结果。超时先 peek，次数没增加才补一次 |
+| 接口 | `https://snappy-tundra-7uesdvk-zengpenghui420-glitch.vercel.app` |
+| 已发出的访问码 | 仍走本页原来的 `POST https://snappy-tundra-7uesdvk.tmp.now/redeem`（`{quiz:shadow, code}`）。本页从未调用 `GET /get`，不要改成那条路径。界面不宣传 |
 | 查看上次 | 仅读本机 `shadow_last_result`，不扣次 |
 
 ## 免责声明
@@ -39,7 +40,7 @@ https://zengpenghui420-glitch.github.io/childhood-shadow/
 python3 -m http.server 8080
 ```
 
-浏览器打开 http://127.0.0.1:8080/ 。未解锁时点「开始测试」会要求验证码；「查看上次结果」只读本地缓存。
+浏览器打开 http://127.0.0.1:8080/ 。未解锁时点「开始测试」会要求订单号；「查看上次结果」只读本地缓存。
 
 ## GitHub Pages
 
