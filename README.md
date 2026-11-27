@@ -15,10 +15,13 @@ https://zengpenghui420-glitch.github.io/childhood-shadow/
 | 计分 | 每维 3 题；`rev` 题按 `6−v`；维分 `(mean−1)/4×100`。**高分 = 该侧印记更重** |
 | 结果 | 阴影指数 0–100（六维均值四舍五入）+ 档位 + 最重的一面 + 雷达 + 特征 + 小建议 |
 | 档位 | DEW / HAZE / DUSK / UMBRA / ECLIPSE / NIGHT |
-| 订单号 | 小红书「我的订单」复制。`quiz=shadow`，一单最多 3 次。界面不核验、不宣传付款 |
-| 扣次 | 开始新一次 `POST /order/redeem`。同一次中途刷新、继续、结果刷新 `GET /order/get` 不扣。再测才再扣。第 4 次拒绝并保留结果。超时先 peek，次数没增加才补一次 |
-| 接口 | `https://snappy-tundra-7uesdvk-zengpenghui420-glitch.vercel.app` |
-| 已发出的访问码 | 仍走本页原来的 `POST https://snappy-tundra-7uesdvk.tmp.now/redeem`（`{quiz:shadow, code}`）。本页从未调用 `GET /get`，不要改成那条路径。界面不宣传 |
+| 订单号 | 小红书「我的订单」复制。只接受 `P` + 18 位；重复块、逐位 ±1 和 19 位显示「订单号格式不对」，不开始。界面不核验、不宣传付款 |
+| 通过 | 格式通过后立刻开始。不请求 `*.vercel.app` 的订单接口，也不读写 Mantle `orders/`。没有服务端绑定、限流或剩余次数 |
+| 提示 | 第一次开始是「验证成功，还可以测 2 次」。点「重新测试」后是「还可以测 1 次」，再点是「这是最后一次」 |
+| 不改提示 | 刷新、继续这一次、结果刷新、查看上次结果都不改变这句提示 |
+| 三次之后 | 同一订单号仍可进入，提示「验证成功」 |
+| 存放 | 次数提示按订单号记在 `shadow_order_uses` |
+| 已发出的访问码 | 仍走本页原来的 `POST https://snappy-tundra-7uesdvk.tmp.now/redeem`（`{quiz:shadow, code}`），按真实剩余次数扣。本页从未调用 `GET /get`，vault 没有这枚码时也不改走 Mantle。界面不宣传 |
 | 查看上次 | 仅读本机 `shadow_last_result`，不扣次 |
 
 ## 免责声明
@@ -33,6 +36,7 @@ https://zengpenghui420-glitch.github.io/childhood-shadow/
 - `.nojekyll` — GitHub Pages 跳过 Jekyll
 - `CODES.md` — 验证码格式与规则（无可卖码）
 - `tools/mint.sh` — 只打印 vault 造码用法
+- `tools/order-unlock.test.mjs` — 本地检查订单号与已发出的访问码（只用合成号码）
 
 ## 本地预览
 
